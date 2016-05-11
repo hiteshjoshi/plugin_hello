@@ -10,7 +10,6 @@ import (
 )
 
 var p *dt.Plugin
-var sm *dt.StateMachine
 
 func init() {
 	// Create the plugin, setting it up to communicate with Abot through
