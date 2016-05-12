@@ -20,37 +20,21 @@ func init() {
 		log.Fatalln("failed to build plugin.", err)
 	}
 
-	// When Abot receives a message, it'll route the message to the correct
-	// package. Doing that requires a trigger, which tells Abot to send the
-	// response to this package when Commands include "say" and Objects
-	// include "something", "hello", etc. Case should always be lowercase,
-	// and the words will be stemmed automatically, so there's no need to
-	// include variations like "cat" and "cats". plugin.AppendTrigger is
-	// optional if you set KeywordHandlers (as described in the Building a
-	// Plugin guide), but since we only have a state machine, we'll add
-	// these words as triggers.
-	plugin.AppendTrigger(p, &nlp.StructuredInput{
-		Commands: []string{"say"},
-		Objects:  []string{"something", "hello", "hi"},
+	// When Abot hears these Trigger words together, e.g. "Say something"
+	// or "Tell me something," Abot will route to this plugin and run the
+	// associated function (Fn), sending the returned string "Hello world!"
+	// to the user.
+	plugin.SetKeywords(p, dt.KeywordHandler{
+		Fn: func(in *dt.Msg) string {
+			return "Hello world!"
+		},
+		Trigger: &nlp.StructuredInput{
+			Commands: []string{"say", "tell"},
+			Objects:  []string{"something"},
+		},
 	})
 
-	// Abot includes a state machine designed to have conversations. This
-	// is the simplest possible example, but we'll cover more advanced
-	// cases with branching conversations, conditional next states, memory,
-	// jumps and more in other guides.
-	//
-	// For more information on state machines in general, see:
-	// https://en.wikipedia.org/wiki/Finite-state_machine
-	plugin.SetStates(p, [][]dt.State{[]dt.State{
-		{
-			OnEntry: func(in *dt.Msg) string {
-				return "Hello world!"
-			},
-			OnInput: func(in *dt.Msg) {
-			},
-			Complete: func(in *dt.Msg) (bool, string) {
-				return true, ""
-			},
-		},
-	}})
+	if err = plugin.Register(p); err != nil {
+		p.Log.Fatal("failed to register plugin.", err)
+	}
 }
