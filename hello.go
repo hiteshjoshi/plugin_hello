@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/itsabot/abot/shared/datatypes"
-	"github.com/itsabot/abot/shared/nlp"
 	"github.com/itsabot/abot/shared/plugin"
 )
 
@@ -28,7 +27,7 @@ func init() {
 		Fn: func(in *dt.Msg) string {
 			return "Hello world!"
 		},
-		Trigger: &nlp.StructuredInput{
+		Trigger: &dt.StructuredInput{
 			Commands: []string{"say", "tell"},
 			Objects:  []string{"something"},
 		},

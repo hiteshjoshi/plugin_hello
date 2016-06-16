@@ -1,7 +1,10 @@
 {
 	"Name": "Hello World",
 	"Maintainer": "Evan Tann <evan@itsabot.org>",
-	"AbotVersion": 0.2,
 	"Description": "A simple plugin to demonstrate basic functionality.",
-	"Icon": "https://d30y9cdsu7xlg0.cloudfront.net/png/34872-200.png"
+	"Icon": "https://d30y9cdsu7xlg0.cloudfront.net/png/34872-200.png",
+	"Usage": [
+		"Say something",
+		"Tell me something"
+	]
 }
