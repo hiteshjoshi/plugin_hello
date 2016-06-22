@@ -14,7 +14,7 @@ func init() {
 	// Create the plugin, setting it up to communicate with Abot through
 	// the functions we specified.
 	var err error
-	p, err = plugin.New("github.com/itsabot/plugin_hello")
+	p, err = plugin.New("github.com/hiteshjoshi/plugin_hello")
 	if err != nil {
 		log.Fatalln("failed to build plugin.", err)
 	}
